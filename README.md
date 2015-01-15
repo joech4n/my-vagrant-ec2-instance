@@ -13,7 +13,7 @@ keypair_name: 'username'
 git clone git@github.com:joech4n/my-vagrant-ec2-instance.git
 ```
 
-3. Edit `Vagrantfile` to customer VM
+3. Edit `Vagrantfile` to customize VM
 
 4. Launch VM
 
