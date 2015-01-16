@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :aws do |aws, override|
 
-    # Loaded from config file
+    # Load from config file
     aws.access_key_id = aws_config["access_key_id"]
     aws.secret_access_key = aws_config["secret_access_key"]
     aws.keypair_name = aws_config["keypair_name"]
@@ -25,8 +25,18 @@ Vagrant.configure("2") do |config|
     }
     aws.ami = "ami-3d50120d" # Ubuntu Server 14.04 LTS (HVM), SSD Volume Type
     aws.instance_type = "t2.small"
+    aws.iam_instance_profile_name = "VagrantRole"
+
+    # Override config above with anything specified in config file
+    aws_config.each do |key, value|
+      aws.send("#{key}=",value)
+    end
 
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = File.expand_path("~") + "/.ssh/id_rsa"
   end
+
+  config.vm.provision "shell",
+    inline: "sudo apt-get install -y awscli"
+
 end
