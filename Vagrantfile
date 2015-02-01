@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   # Disable sync folder
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
-  # Install mosh
+  # Install stuff
   config.vm.provision "shell", inline: "sudo apt-get install -y mosh git fish"
   config.vm.provision "shell", inline: "git clone https://github.com/joech4n/zsh-dotfiles.git ~/.dotfiles && ~/.dotfiles/script/bootstrap -n", privileged: false
 
